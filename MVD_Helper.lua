@@ -81,7 +81,7 @@ local org = 0
 --ОБНОВЛЕНИЕ--
 if not imgui.update then
     imgui.update = {
-        needupdate = false, updateText = u8"Нажмите на \"Проверить обновление\"", version = "1.0.0"
+        needupdate = false, updateText = u8"Нажмите на \"Проверить обновление\"", version = "1.0.2"
 }
 end
 --Другое--
