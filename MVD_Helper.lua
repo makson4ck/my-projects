@@ -8,6 +8,8 @@ local faicons = require('fAwesome6')
 local new, str = imgui.new, ffi.string
 local sampev = require('lib.samp.events')
 local sizeof = ffi.sizeof
+local request = require("requests")
+local json = require("cjson")
 
 function sampev.onSendSpawn()
     sampSendChat("/stats")
@@ -79,14 +81,13 @@ local totag = new.char[255](u8(ini.cfg.totag))
 local zk = "-"
 
 local org = 0
+local rank = 0
 --ОБНОВЛЕНИЕ--
-local imgui = {
-    update = {
-        version = "1.0.2",
-        needupdate = false,
-        updateText = "Нажмите на \"Проверить обновление\""
-    }
+if not imgui.update then
+    imgui.update = {
+        needupdate = false, updateText = u8"Нажмите на \"Проверить обновление\"", version = "1.0.0"
 }
+end
 --Другое--
 local sizeX, sizeY = getScreenResolution()
 local sobes = {
@@ -1047,6 +1048,7 @@ end
 				lua_thread.create(function() wait(1) thisScript():unload() end)
 				imgui.ShowCursor = false
 			end
+			
             if imgui.update.needupdate then
                 local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize(u8"Обновиться").x) / 2
                 imgui.SetCursorPosX(centered_x)
@@ -1081,6 +1083,8 @@ end
                             end
                         end
                     end
+      
+      -- Уведомление пользователя об обновлениях
         if imgui.update.updateText ~= "" then
             imgui.Separator()
             local updateTextWidth = imgui.CalcTextSize(imgui.update.updateText).x
@@ -1092,7 +1096,7 @@ end
         if imgui.Button(u8"Связь с разработчиком") then
             gta._Z12AND_OpenLinkPKc("https://t.me/makson4ck")
      end
-    end
+ end
         imgui.EndChild()
         end
     imgui.End()
