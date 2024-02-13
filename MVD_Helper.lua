@@ -29,6 +29,7 @@ function sampev.onShowDialog(id, style, title, button1, button2, text)
         end
     end
 end
+end
 
 local inicfg = require 'inicfg'
 local iniFile = 'Styles.ini'
@@ -79,11 +80,13 @@ local zk = "-"
 
 local org = 0
 --ОБНОВЛЕНИЕ--
-if not imgui.update then
-    imgui.update = {
-        needupdate = false, updateText = u8"Нажмите на \"Проверить обновление\"", version = "1.0.2"
+local imgui = {
+    update = {
+        version = "1.0.2",
+        needupdate = false,
+        updateText = "Нажмите на \"Проверить обновление\""
+    }
 }
-end
 --Другое--
 local sizeX, sizeY = getScreenResolution()
 local sobes = {
@@ -1044,7 +1047,6 @@ end
 				lua_thread.create(function() wait(1) thisScript():unload() end)
 				imgui.ShowCursor = false
 			end
-			
             if imgui.update.needupdate then
                 local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize(u8"Обновиться").x) / 2
                 imgui.SetCursorPosX(centered_x)
@@ -1079,8 +1081,6 @@ end
                             end
                         end
                     end
-      
-      -- Уведомление пользователя об обновлениях
         if imgui.update.updateText ~= "" then
             imgui.Separator()
             local updateTextWidth = imgui.CalcTextSize(imgui.update.updateText).x
@@ -1092,6 +1092,7 @@ end
         if imgui.Button(u8"Связь с разработчиком") then
             gta._Z12AND_OpenLinkPKc("https://t.me/makson4ck")
      end
+    end
         imgui.EndChild()
         end
     imgui.End()
