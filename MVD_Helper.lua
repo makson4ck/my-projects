@@ -2,7 +2,7 @@ local ffi = require 'ffi'
 local imgui = require 'mimgui'
 local encoding = require 'encoding'
 encoding.default = 'CP1251'
-local function u8(s) return encoding.UTF8:decode(s) end
+local u8 = encoding.UTF8
 local new = imgui.new
 local faicons = require('fAwesome6')
 local new, str = imgui.new, ffi.string
