@@ -2,7 +2,7 @@ local ffi = require 'ffi'
 local imgui = require 'mimgui'
 local encoding = require 'encoding'
 encoding.default = 'CP1251'
-local u8 = encoding.UTF8
+local function u8(s) return encoding.UTF8:decode(s) end
 local new = imgui.new
 local faicons = require('fAwesome6')
 local new, str = imgui.new, ffi.string
@@ -85,7 +85,7 @@ local rank = 0
 --ОБНОВЛЕНИЕ--
 if not imgui.update then
     imgui.update = {
-        needupdate = false, updateText = u8"Нажмите на \"Проверить обновление\"", version = "1.0.3"
+        needupdate = false, updateText = u8"Нажмите на \"Проверить обновление\"", version = "1.0.4"
 }
 end
 --Другое--
