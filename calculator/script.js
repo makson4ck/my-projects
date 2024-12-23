@@ -1,70 +1,62 @@
-let currentInput = "0";
-let expression = "";
+let text = "0";
+let text_decision = "";
 const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
-const operators = ['+', '×', '-', '/'];
-const output = document.querySelector(".text p");
+const action = ['+', '×', '-', '/'];
+const out = document.querySelector(".text p");
 
-function clearAll() {
-    currentInput = "0";
-    expression = "";
-    output.textContent = currentInput;
+function clearall() {
+    text = "0";
+    text_decision = "";
+    out.textContent = text;
 }
 
-document.querySelector('.ac').onclick = clearAll;
+document.querySelector('.ac').onclick = clearall;
 
 document.querySelector(".buttons").onclick = (event) => {
     if (!event.target.classList.contains('btn')) return;
+    if (event.target.classList.contains('ac')) return;
     const key = event.target.textContent;
 
-    if (key === "←") {
-        if (currentInput.length > 1) {
-            currentInput = currentInput.slice(0, -1);
-            expression = expression.slice(0, -1);
-        } else {
-            currentInput = "0";
-            expression = "";
-        }
-        output.textContent = currentInput;
-        return;
-    }
-
-    if (numbers.includes(key) || operators.includes(key)) {
+    if (numbers.includes(key) || action.includes(key)) {
         if (key === "×") {
-            expression += "*";
+            text_decision += "*"; 
         } else {
-            expression += key;
+            text_decision += key;
         }
 
-        if (currentInput === "0" && key !== ".") {
-            currentInput = key;
-        } else {
-            currentInput += key;
+        // Обновление экрана
+        if (text !== "0") {
+            text += key;
+        } else if (text === "0") {
+            text = key;
         }
-
-        output.textContent = currentInput;
+        out.textContent = text;
     }
 
     if (key === "=") {
         try {
-            let result = eval(expression);
-            currentInput = result.toString();
-            expression = currentInput;
+            text = eval(text_decision).toString();
+            text_decision = text;
         } catch (error) {
-            currentInput = "Error";
+            text = "Ошибка";
         }
+        out.textContent = text;
+    }
 
-        output.textContent = currentInput;
+    if (key === "←") {
+        if (text.length > 1) {
+            text = text.slice(0, -1);
+            text_decision = text_decision.slice(0, -1);
+        } else {
+            text = "0";
+            text_decision = "";
+        }
+        out.textContent = text;
     }
 
     if (key === "+/-") {
-        currentInput = (parseFloat(currentInput) * -1).toString();
-        expression = currentInput;
-        output.textContent = currentInput;
-    }
-
-    if (operators.includes(key)) {
-        if (expression.length > 0 && !operators.includes(expression[expression.length - 1])) {
-            expression += key;
-        }
+        text = (parseFloat(text) * -1).toString();
+        text_decision = text;
+        out.textContent = text;
     }
 }
