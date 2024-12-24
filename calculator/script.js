@@ -24,7 +24,6 @@ document.querySelector(".buttons").onclick = (event) => {
             text_decision += key;
         }
 
-        // Обновление экрана
         if (text !== "0") {
             text += key;
         } else if (text === "0") {
