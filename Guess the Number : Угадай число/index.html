@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Угадай число/Guest the number</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Угадай число/Guest the number</h1>
+        <p id="instructions">Я загадал число от 1 до 100. Сможешь угадать?</p>
+        <p id="instructions">I guessed a number from 1 to 100. Can you guess?</p>
+        <input type="number" id="guess" placeholder="Введите число/Enter number" min="1" max="100">
+        <button id="check-btn">Проверить/Check</button>
+        <button id="restart-btn" class="hidden">Начать заново/Start again</button>
+        <p id="result"></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
